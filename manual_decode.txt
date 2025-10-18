@@ -1,0 +1,31 @@
+1.	manually decode the transaction
+Raw tx hex begins with: 02 000000 00 01 ... — version 2 + segwit marker/flag.
+•	Version: 2 (0x00000002 little-endian in the raw bytes)
+•	SegWit marker/flag: present (0x00 0x01) → this is a segwit transaction.
+•	Number of inputs: 1
+Input #0
+o	Previous txid (little-endian as stored in the raw tx):
+31811cd355c357e0e01437d9bcf690df824e9ff785012b6115dfae3d8e8b36c1
+o	Previous output index (vout): 1
+o	scriptSig: empty (length 0) is typical for P2WPKH input where witness holds signature/pubkey
+o	sequence: 0xfffffffd -> decimal 4294967293
+•	Number of outputs: 2
+Output #0
+o	Value: 500000 sats = 0.005BTC
+o	scriptPubKey (raw): 001485d78eb795bd9c8a21afefc8b6fdaedf71836809
+-	This is 0x00 0x14 <20-byte-hash> -> P2WPKH (SegWit v0)
+-	PubkeyHash (20 bytes): 85d78eb795bd9c8a21afefc8b6fdaedf71836809
+Output #1
+o	Value: 1050700 sats = 0.01050700 BTC
+o	scriptPubKey (raw): 0014840ab165c9c2555d4a31b9208ad806f89d2535e2
+-	Also 0x00 0x14 <20-byte-hash> ->  P2WPKH (SegWit v0)
+-	PubkeyHash: 840ab165c9c2555d4a31b9208ad806f89d2535e2
+•	Witness data (for the 1 input):
+o	Witness stack item count for input 0: 2
+-	Signature (DER + sighash):
+304402207bce86d430b58bb6b79e8c1bbecdf67a530eff3bc61581a1399e0b28a741c0ee0220303d5ce926c60bf15577f2e407f28a2ef8fe8453abd4048b716e97dbb1e3a85c01
+(DER signature, last byte 01 likely SIGHASH_ALL)
+-	Public key (compressed):
+0260828bc77486a55e3bc6032ccbeda915d9494eda17b4a54dbe3b24506d40e4ff
+(33 bytes, starts with 0x02 → compressed public key)
+•	Locktime: 918339 (decimal) → hex 0x000e0343
